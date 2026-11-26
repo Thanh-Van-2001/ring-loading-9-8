@@ -23,7 +23,7 @@
 \newcommand{\cw}{\mathrm{cw}}
 \newcommand{\ccw}{\mathrm{ccw}}
 
-\title{A $9/8$ lower bound for the ring loading problem}
+\title{The $9/8$ lower bound for ring loading:\\ an independent rediscovery with exact proofs}
 \author{Thanh Van Nguyen\\[2pt]
 \small Tsinghua Shenzhen International Graduate School, Tsinghua University, Shenzhen, China\\
 \small \texttt{felicenguyen2001@gmail.com}}
@@ -37,9 +37,9 @@ In the ring loading problem, demands between pairs of nodes of a cycle must each
 Schrijver, Seymour and Winkler (1998) proved $L \le L^* + \tfrac32 D$, where $L^*$ is the optimum when demands may be split and $D$ is the largest demand.
 The best constant is open. Skutella (2016) gave an instance with $L = L^* + \tfrac{11}{10}D$, and Däubel (2022) proved $L \le L^* + \tfrac{13}{10}D$.
 We give a ring with 43 nodes and 55 demands, at most one demand per pair of nodes, for which $L = L^* + \tfrac98 D$. So the constant is at least $9/8$.
-The instance is built from a 15-term sequence that also gives the value $9/8$ for the closely related sequence constant of Schrijver, Seymour and Winkler. That constant is Problem~6.61 in the AlphaEvolve problem list of Georgiev, Gómez-Serrano, Tao and Wagner, and our value improves the bound $47/42$ reported there in 2025.
+The instance is built from a 15-term sequence that also gives the value $9/8$ for the closely related sequence constant of Schrijver, Seymour and Winkler. That constant is Problem~6.61 in the AlphaEvolve problem list of Georgiev, Gómez-Serrano, Tao and Wagner.
 All data are multiples of $1/16$, and both bounds have exact, computer-checked proofs that run in seconds.
-We also show that AlphaEvolve's sequence, lifted to a ring by the same construction, gives a gap below $\tfrac{11}{10}D$.
+\emph{Priority:} neither bound is new. The value $9/8$ for the sequence constant was posted first by the GitHub user Maks23 on 8 October 2026, and Lemma~7 of Däubel (2022) turns such a sequence into a ring with gap $\tfrac98 D$. We found our instance independently; this note records it as an independent rediscovery with a second set of exact proofs.
 \end{abstract}
 
 \section{Introduction}
@@ -58,7 +58,7 @@ Define $\rho$ as the infimum of the constants $c$ such that $L\le L^*+cD$ holds 
 Schrijver, Seymour and Winkler \cite{SSW98} proved $\rho\le 3/2$ and gave an instance with $L=L^*+\tfrac{101}{100}D$.
 Skutella \cite{Sku16} improved both bounds to $11/10\le\rho\le 19/14$ and disproved a long-standing conjecture of \cite{SSW98}.
 Däubel \cite{Dau22} improved the upper bound to $\rho\le 13/10$.
-The lower bound $11/10$ has not moved since 2016.
+In the published literature, the lower bound $11/10$ had not moved since 2016.
 It is still the value quoted in recent work \cite{AS26}.
 That paper studies the generalisation to outerplanar supply graphs and proves a lower bound of $4/3$ for that larger class.
 
@@ -67,14 +67,20 @@ The constant $\beta$ is Problem~6.61 in the list of 67 problems studied with Alp
 There, AlphaEvolve found a sequence of length~15 with value at least $1.119$, improving the bound $11/10$ of \cite{Sku16}.
 The public problem repository records this bound as $47/42\approx1.1190$, and still listed it as the record when we wrote this note \cite{AERepo}.
 In November 2026 we searched Semantic Scholar and arXiv for work citing \cite{SSW98,Sku16,Dau22,GGTW25}. We found no lower bound above $11/10$ for~$\rho$, and none above $47/42$ for~$\beta$.
-A lower bound for $\beta$ does not, however, directly give a ring instance: see Section~\ref{sec:ring} and Proposition~\ref{prop:ae}.
+That search did not cover the issue tracker of \cite{AERepo}, where both bounds had already appeared.
+
+\paragraph{Priority.}
+After the first version of this note we learned of that discussion. Exact certificates for $\beta\ge47/42$ (V.~Yadav, 6 October 2026 \cite{Yad26}) and for $\beta\ge9/8$ (Maks23, 8 October 2026, a sequence of length~14 with entries in $\tfrac1{16}\mathbb{Z}$ \cite{Mak26}) were posted there before our work.
+In the same thread, K.~Däubel gave a $9/8$ sequence of length~12 and pointed out that \cite[Lemma~7]{Dau22} turns such a sequence into a ring loading instance with $L-L^*\ge\tfrac98 D$. So $\rho\ge9/8$ also predates this note. The user rozetyp later checked the resulting rings directly with an exact solver \cite{Roz26}.
+We have rechecked the certificates of \cite{Mak26} in exact arithmetic.
+Our sequence (Table~\ref{tab:seq}) and our ring construction were found independently. The results below are therefore an independent rediscovery with a second set of exact proofs, not new bounds.
 
 \paragraph{Contributions.}
 \begin{enumerate}[label=(\arabic*),leftmargin=*]
-\item A sequence of length $15$ with entries in $\tfrac1{16}\mathbb{Z}$ that forces the value $9/8$ (Theorem~\ref{thm:seq}). Hence $\beta\ge 9/8$, improving $47/42$.
-\item A ring loading instance with $D=1$, $L^*=15/2$ and $L=69/8$ (Theorem~\ref{thm:ring} and Corollary~\ref{cor:distinct}). It has $43$ nodes and $55$ demands on distinct node pairs, or $30$ nodes if a node pair may carry several demands. Hence $\rho\ge 9/8$. To our knowledge this is the first improvement of Skutella's $11/10$.
+\item A sequence of length $15$ with entries in $\tfrac1{16}\mathbb{Z}$ that forces the value $9/8$ (Theorem~\ref{thm:seq}). Hence $\beta\ge 9/8$, first shown in \cite{Mak26}.
+\item A ring loading instance with $D=1$, $L^*=15/2$ and $L=69/8$ (Theorem~\ref{thm:ring} and Corollary~\ref{cor:distinct}). It has $43$ nodes and $55$ demands on distinct node pairs, or $30$ nodes if a node pair may carry several demands. Hence $\rho\ge 9/8$, which also follows from \cite{Mak26} and \cite[Lemma~7]{Dau22}.
 \item Both proofs are exact finite computations. The ring proof reduces to a subset-sum check on $8$ of the $2^{15}$ routings of the long demands (Lemma~\ref{lem:filler}). We release two implementations of this argument, each running in seconds, and a third program that checks the bound by a different argument.
-\item The same lift applied to AlphaEvolve's sequence gives a gap below $\tfrac{11}{10}D$ (Proposition~\ref{prop:ae}). The gap is at most $1.0823\,D$ for the published data, and exactly $\tfrac{23}{21}D$ for a version polished to attain $47/42$ exactly. So, to our knowledge, Skutella's instance remained the best lower bound for $\rho$ itself until now.
+\item Our lift loses part of the gap on AlphaEvolve's sequence (Proposition~\ref{prop:ae}): at most $1.0823\,D$ for the published data, and exactly $\tfrac{23}{21}D$ for a version polished to attain $47/42$ exactly. The construction of \cite[Lemma~7]{Dau22} does not lose it \cite{Roz26}, so this is a limitation of our construction only.
 \item We describe the search that found the instance (Section~\ref{sec:search}). We also report that extensive further search stalled at exactly $9/8$.
 \end{enumerate}
 
@@ -271,7 +277,7 @@ The bound $L\le26/3$ comes from an explicit routing that sends filler pieces of 
 In~(b), keeping every filler on its own edge would leave a gap of at least $47/42$ (Lemma~\ref{lem:load}), and rerouting fillers lowers it to $23/21=46/42$.
 So the sequence bound of~\cite{GGTW25} does not transfer to $\rho$ through this construction.
 The sequence of Table~\ref{tab:seq} does transfer without loss, although, as Remark~\ref{rem:others} shows, not every $9/8$ sequence does.
-We do not know whether some other construction would lift $47/42$.
+The construction of \cite[Lemma~7]{Dau22} does lift it: rozetyp computed a ring gap of exactly $\tfrac{47}{42}D$ from the exact certificate of \cite{Yad26} \cite{Roz26}.
 
 \section{How the instance was found}\label{sec:search}
 
@@ -300,7 +306,7 @@ This is evidence only that $9/8$ is a barrier for this kind of local search. It 
 The known ranges are now $9/8\le\rho\le13/10$ and $9/8\le\beta\le19/14$.
 Is $\rho=9/8$, or $\beta=9/8$?
 A first step would be a structural explanation of the $9/8$ instances. In Table~\ref{tab:seq}, seven rows have $u_k+v_k=1$, and several rows repeat: rows 1, 7 and 13; rows 2 and 8; rows 3 and 9; rows 6 and 14. There are also two zeros. These features might generalise to a family.
-Another question is whether every lower-bound sequence for $\beta$ can be lifted to the ring without loss by a better choice of fillers. Proposition~\ref{prop:ae} shows that our filler choice does not always achieve this.
+Our filler choice does not always lift a sequence without loss (Proposition~\ref{prop:ae}), but the construction of \cite[Lemma~7]{Dau22} does \cite{Mak26,Roz26}.
 
 \section*{Code and data}
 The instances (exact rational data), the two verifiers and the search code are available at \url{https://github.com/Thanh-Van-2001/ring-loading-9-8}.
@@ -332,7 +338,22 @@ S.~Cosares and I.~Saniee.
 \bibitem{Dau22}
 K.~Däubel.
 \newblock An improved upper bound for the ring loading problem.
-\newblock \emph{SIAM Journal on Discrete Mathematics}, 36(2):867--887, 2022. doi:10.1137/20M1319395.
+\newblock \emph{SIAM Journal on Discrete Mathematics}, 36(2):867--887, 2022. doi:10.1137/20M1319395. arXiv:1904.02119.
+
+\bibitem{Mak26}
+Maks23 (GitHub user), with comments by V.~Yadav, K.~Däubel, C.~Toledo and rozetyp.
+\newblock Problem 61 (Ring Loading): new lower bound $C\ge9/8$, exact certificate with $m=14$.
+\newblock Issue~\#12 of \cite{AERepo}, 8 October 2026. \url{https://github.com/google-deepmind/alphaevolve_repository_of_problems/issues/12}.
+
+\bibitem{Roz26}
+rozetyp (GitHub user).
+\newblock Ring loading instances built from the $47/42$ and $9/8$ certificates, solved exactly with CP-SAT.
+\newblock \url{https://github.com/rozetyp/ring-loading-47-42}, 23 November 2026.
+
+\bibitem{Yad26}
+V.~Yadav.
+\newblock Problem 61 (ring loading): exact rational instance with $\alpha=47/42$.
+\newblock Issue~\#11 of \cite{AERepo}, 6 October 2026. \url{https://github.com/google-deepmind/alphaevolve_repository_of_problems/issues/11}.
 
 \bibitem{GGTW25}
 B.~Georgiev, J.~Gómez-Serrano, T.~Tao, and A.~Z.~Wagner.

@@ -1,13 +1,21 @@
-# A 9/8 lower bound for the ring loading problem
+# The 9/8 lower bound for ring loading: an independent rediscovery
+
+> **Priority correction (26 Nov 2026).** The bound 9/8 is **not** new, and an earlier version of this README wrongly called it new.
+> It was first posted by **Maks23** on 8 Oct 2026, as a 14-term exact certificate for the sequence constant β, in [issue #12 of DeepMind's AlphaEvolve problem repository](https://github.com/google-deepmind/alphaevolve_repository_of_problems/issues/12).
+> In the same thread, **Karl Däubel** gave a 12-term instance and pointed out that Lemma 7 of his 2022 paper turns such a certificate into a real ring with L − L\* ≥ 9/8·D.
+> **rozetyp** then checked those rings directly with CP-SAT ([repo](https://github.com/rozetyp/ring-loading-47-42)).
+> The exact 47/42 certificate is due to V. Yadav ([issue #11](https://github.com/google-deepmind/alphaevolve_repository_of_problems/issues/11), 6 Oct 2026).
+> Our literature check (Semantic Scholar and arXiv) missed that issue thread.
+> The instance below was found independently. This repository is a second, independent set of exact proofs; it does not claim a new bound.
 
 The ring loading problem routes each demand on a cycle, unsplit, either clockwise or counterclockwise, and minimises the maximum edge load L.
 L\* is the optimum when demands may be split, and D is the largest demand.
-This repository contains explicit instances, exact computer-checked proofs and the search code for two new lower bounds:
+This repository contains explicit instances, exact computer-checked proofs and the search code for the following bounds:
 
-| Constant | Previous lower bound | This work |
-|---|---|---|
-| Ring loading: smallest ρ with L ≤ L\* + ρD on every ring | 11/10 (Skutella, SIAM J. Discrete Math. 2016) | **9/8** |
-| Schrijver–Seymour–Winkler sequence constant β (Problem 6.61 of Georgiev, Gómez-Serrano, Tao and Wagner, arXiv:2511.02864) | 47/42 (AlphaEvolve, 2025) | **9/8** |
+| Constant | Bound before Oct 2026 | 9/8, first shown by | This repository |
+|---|---|---|---|
+| Ring loading: smallest ρ with L ≤ L\* + ρD on every ring | 11/10 (Skutella, SIAM J. Discrete Math. 2016) | Maks23's certificate + Däubel's Lemma 7 (Oct 2026) | independent 9/8 instance |
+| Schrijver–Seymour–Winkler sequence constant β (Problem 6.61 of Georgiev, Gómez-Serrano, Tao and Wagner, arXiv:2511.02864) | ≈1.119 (AlphaEvolve, 2025); 47/42 exact (V. Yadav, Oct 2026) | Maks23 (8 Oct 2026) | independent 9/8 sequence (m = 15) |
 
 The known upper bounds are ρ ≤ 13/10 (Däubel, 2022) and β ≤ 19/14 (Skutella, 2016).
 
@@ -49,7 +57,7 @@ Independent checks:
 | `python verify.py instances/instance_m15_den16_a.json` | Brute force of the sequence value | under 1 s |
 | `python ring_exact.py instances/instance_m15_den16_a.json` | Second implementation of the ring proof (numba) | about 10 s |
 | `python check_minsum.py instances/instance_m15_den16_a.json 9 8` | Ring bound by a different argument, without the filter lemma | a few minutes |
-| `python ae_raw_lift.py` | AlphaEvolve's published floating-point sequence, taken exactly: α = 1.1190475…, ring-lift gap ≤ 1.0823 | under 1 min |
+| `python ae_raw_lift.py` | AlphaEvolve's published floating-point sequence, taken exactly: α = 1.1190475…; *our* ring lift gives a gap ≤ 1.0823 (Däubel's Lemma 7 construction does not lose the gap) | under 1 min |
 
 ## Search code
 
@@ -77,7 +85,8 @@ The search code, the verifiers and the first draft of the note were written with
 
 ## Citation
 
-Thanh Van Nguyen, *A 9/8 lower bound for the ring loading problem*, 2026. Preprint, with the arXiv identifier to be added.
+Please cite the original posts first: Maks23, issue #12 of the AlphaEvolve problem repository (8 Oct 2026), and K. Däubel, SIAM J. Discrete Math. 36 (2022), Lemma 7.
+This repository: Thanh Van Nguyen, *The 9/8 lower bound for ring loading: an independent rediscovery with exact proofs*, 2026 (note in `paper/`, not submitted to arXiv).
 
 ## License
 
